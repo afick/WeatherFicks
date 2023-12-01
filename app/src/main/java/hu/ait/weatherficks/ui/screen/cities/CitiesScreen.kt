@@ -196,7 +196,7 @@ fun CityCard(
 
     val coroutineScope = rememberCoroutineScope()
     var temp by rememberSaveable {
-        mutableDoubleStateOf(0.0)
+        mutableDoubleStateOf(-1234.5)
     }
     var icon by rememberSaveable {
         mutableStateOf(context.getString(R.string.default_icon_txt))
@@ -265,7 +265,7 @@ fun CityCard(
                         .size(75.dp)
                         .clip(CircleShape)
                 )
-                if (cityItem.country.isNotEmpty()) {
+                if (cityItem.country.isNotEmpty() && temp != -1234.5) {
                     Text(
                         text = stringResource(id = R.string.current_temp_string, temp.toInt(), degree),
                         modifier = Modifier.padding(4.dp),
@@ -399,7 +399,7 @@ private fun AddNewCityForm(
                     color = MaterialTheme.colorScheme.secondaryContainer,
                     shape = MaterialTheme.shapes.medium
                 )
-                .padding(16.dp)
+                .padding(16.dp).animateContentSize()
         ) {
             OutlinedTextField(
                 value = cityName,
